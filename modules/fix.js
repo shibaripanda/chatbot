@@ -6,7 +6,7 @@ export const fix = {
     startStatus: 'simple',
     appContextTimeInterval: 500000,
     timeToShowInfo: 500000,
-    timeToDeleteInfo: 5500,
+    timeToDeleteInfo: 7500,
     timeToDeleteRules: 150000,
     timeToDeleteMedia: 250000,
     memberLevel: [
