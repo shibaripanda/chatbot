@@ -23,7 +23,7 @@ text: {
 },
 usernameCurrent: {
     type: String,
-    required: true,
+    required: false,
 },
 countMessagesInChat: {
     type: Number,
