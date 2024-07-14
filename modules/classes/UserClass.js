@@ -28,8 +28,14 @@ export class UserClass {
     timeFromLastMessage(){
         return Date.now() - new Date(this.db.updatedAt).getTime()
     }
+    name(){
+        if(this.db.status == 'simple'){
+            return fix.memberLevel.find(item => this.db.countMessagesInChat >= item.min && this.db.countMessagesInChat <= item.max).text
+        }
+        return this.db.statusName
+    }
     async myInfo(){
-        const info = `<b>${this.db.statusName}</b>` + 
+        const info = `<b>${this.name()}</b>` + 
         `\n"${this.db.text}"` +
         `\n▫️▫️▫️▫️▫️▫️▫️` +
         `\n<b>🐼 Я с вами:</b> ${this.countDays()} дней` + 
