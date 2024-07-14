@@ -34,7 +34,7 @@ export const getUser = async (ctx, appContext) => {
                 user.text = fix.startText
                 check = true
             }
-            if(!user.time){
+            if(!user.time || user.time.length == 0){
                 user.time = [{in: Date.now()}]
                 check = true
             }
