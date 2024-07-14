@@ -19,7 +19,7 @@ const premiumUsers = [
 
 export const firstStartForNewBot = async () => {
     for(let i of premiumUsers){
-        let user = await User.findOneAndUpdate({usernameCurrent: i.a})
+        let user = await User.findOne({usernameCurrent: i.a})
         if(user){
             user.status = 'premium'
             user.statusName = i.b
