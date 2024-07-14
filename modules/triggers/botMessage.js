@@ -15,6 +15,7 @@ export const botMessage = async (bot, appContext) => {
             console.log(ctx)
 
             const user = await getUser(ctx, appContext)
+            console.log(user)
 
             await user.incMessage().catch(error => console.log(error))
 
