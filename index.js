@@ -7,14 +7,14 @@ import { botChatMember } from './modules/triggers/botChatMember.js'
 import { botCommands } from './modules/triggers/botCommands.js'
 import { fix } from './modules/fix.js'
 import { updateAppContext } from './modules/updateAppContext.js'
-// import { firstStartForNewBot } from './modules/helpers/firstStartForNewBot.js'
+import { firstStartForNewBot } from './modules/helpers/firstStartForNewBot.js'
 
 async function startChatBot(){
     try{
         const option = {allowedUpdates: ['chat_member', 'callback_query', 'message', 'channel_post'], dropPendingUpdates: true}
         var status = await db()
         if(status){
-            // await firstStartForNewBot()
+            await firstStartForNewBot()
 
             let appContext = {}
             appContext = await updateAppContext(appContext)
