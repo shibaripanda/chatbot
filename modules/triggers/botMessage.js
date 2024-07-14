@@ -12,9 +12,11 @@ export const botMessage = async (bot, appContext) => {
                 else return false
             }
 
+            console.log(ctx)
+
             const user = await getUser(ctx, appContext)
 
-            await user.incMessage()
+            await user.incMessage().catch(error => console.log(error))
 
             if(typeof ctx.message['text'] !== "undefined"){
                 if(userRole() && ctx.message.text.includes('set', 0)){
