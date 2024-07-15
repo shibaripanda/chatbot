@@ -12,10 +12,10 @@ export const botMessage = async (bot, appContext) => {
                 else return false
             }
 
-            console.log(ctx)
+            // console.log(ctx)
 
             const user = await getUser(ctx, appContext)
-            console.log(user)
+            // console.log(user)
 
             await user.incMessage().catch(error => console.log(error))
 

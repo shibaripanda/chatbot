@@ -8,7 +8,7 @@ export const fix = {
     timeToShowInfo: 500000,
     timeToDeleteInfo: 7500,
     timeToDeleteRules: 150000,
-    timeToDeleteMedia: 250000,
+    timeToDeleteMedia: 3600000,
     memberLevel: [
         {text: 'Сопля зелёная 🐸', min: 0, max: 250},
         {text: 'Простолюдин 🐰', min: 251, max: 1000},

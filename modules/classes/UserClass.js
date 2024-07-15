@@ -39,8 +39,8 @@ export class UserClass {
         `\n"${this.db.text}"` +
         `\n▫️▫️▫️▫️▫️▫️▫️` +
         `\n<b>🐼 Я с вами:</b> ${this.countDays()} дней` + 
-        `\n<b>🐼 Первый визит:</b> ${await this.dateStart()}` + 
-        `\n<b>🐼 Последний визит:</b> ${await this.dateLast()}` +
+        `\n<b>🐼 Первый:</b> ${await this.dateStart()}` + 
+        `\n<b>🐼 Последний:</b> ${await this.dateLast()}` +
         `\n💬 ${this.db.countMessagesInChat} 🚪 ${this.db.time.length}`
         return info
     }
