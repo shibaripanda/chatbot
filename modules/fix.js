@@ -6,9 +6,9 @@ export const fix = {
     startStatus: 'simple',
     appContextTimeInterval: 500000,
     timeToShowInfo: 500000,
-    timeToDeleteInfo: 7500,
+    timeToDeleteInfo: 9500,
     timeToDeleteRules: 150000,
-    timeToDeleteMedia: 3600000,
+    timeToDeleteMedia: 5400000,
     memberLevel: [
         {text: 'Сопля зелёная 🐸', min: 0, max: 250},
         {text: 'Простолюдин 🐰', min: 251, max: 1000},
