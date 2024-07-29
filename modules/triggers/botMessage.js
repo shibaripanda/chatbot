@@ -11,12 +11,7 @@ export const botMessage = async (bot, appContext) => {
                 if(appContext.app.db.superAdmin == ctx.from.id) return true
                 else return false
             }
-
-            // console.log(ctx)
-
             const user = await getUser(ctx, appContext)
-            // console.log(user)
-
             await user.incMessage().catch(error => console.log(error))
 
             if(typeof ctx.message['text'] !== "undefined"){
@@ -39,7 +34,7 @@ export const botMessage = async (bot, appContext) => {
                     if(ctx.message.text == 'rules'){
                         await appContext.app.showRules(ctx)
                     }
-                    else if(ctx.message.text.includes('text', 0)){
+                    else if(ctx.message.text.split(' ')[0] === 'text'){
                         await user.upDate({text: ctx.message.text.substring(5, ctx.message.text.length)})
                     }
                     else if(user.timeFromLastMessage() > fix.timeToShowInfo || ctx.message.text == 'myinfo'){
