@@ -7,6 +7,8 @@ export const botMessage = async (bot, appContext) => {
     try{
         bot.on('message', async (ctx) => {
 
+            console.log(ctx.chat.id)
+
             const userRole = () => {
                 if(appContext.app.db.superAdmin == ctx.from.id) return true
                 else return false
