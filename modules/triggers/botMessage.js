@@ -42,6 +42,9 @@ export const botMessage = async (bot, appContext) => {
                     else if(user.timeFromLastMessage() > fix.timeToShowInfo || ctx.message.text == 'myinfo'){
                         await user.messageInChat(ctx)
                     }
+                    else if(ctx.message.text.split(' ')[0] === 'anon' && ctx.chat.id > 0){
+                        await ctx.telegram.sendMessage(-1001703165720, ctx.message.text, {parse_mode: 'HTML'}).catch(error => console.log(error))
+                    }
                     else{
                         if(await getRandomIndex(0, 20) == 15){
                             const text = (await funcGpt(ctx.message.text + ' до 150 знаков')).choices[0].message.content
