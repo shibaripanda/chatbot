@@ -7,6 +7,11 @@ export const botMessage = async (bot, appContext) => {
     try{
         bot.on('message', async (ctx) => {
 
+            const buttons = [
+                [{ text: 'Yes', callback_data: '' }],
+                [{ text: 'No', callback_data: '' }]
+            ]
+
             console.log(ctx.chat.id)
 
             const userRole = () => {
@@ -43,7 +48,7 @@ export const botMessage = async (bot, appContext) => {
                         await user.messageInChat(ctx)
                     }
                     else if(ctx.message.text.split(' ')[0] === 'anon' && ctx.chat.id > 0){
-                        await ctx.telegram.sendMessage(-1001703165720, ctx.message.text, {parse_mode: 'HTML'}).catch(error => console.log(error))
+                        await ctx.telegram.sendMessage(-1001703165720, ctx.message.text, {parse_mode: 'HTML', reply_markup: {inline_keyboard: buttons}}).catch(error => console.log(error))
                     }
                     else{
                         if(await getRandomIndex(0, 20) == 15){
