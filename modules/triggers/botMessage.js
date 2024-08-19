@@ -8,8 +8,8 @@ export const botMessage = async (bot, appContext) => {
         bot.on('message', async (ctx) => {
 
             const buttons = [
-                [{ text: 'Yes', callback_data: '' }],
-                [{ text: 'No', callback_data: '' }]
+                [{ text: 'Yes', callback_data: 'x' }],
+                [{ text: 'No', callback_data: 'xxx' }]
             ]
 
             console.log(ctx.chat.id)
