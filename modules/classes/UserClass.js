@@ -11,11 +11,13 @@ export class UserClass {
     async addLove(ctx){
         const love = await User.findOneAndUpdate({usernameCurrent: ctx.message.text.split(' ')[1]}, {$addToSet: {love: this.db.id}})
         if(love){
+            await ctx.telegram.sendMessage(-1001703165720, `У ${love.usernameCurrent} завелся воздыхатель или воздыхательница!`, {parse_mode: 'HTML'}).catch(error => console.log(error))
+            await ctx.telegram.sendMessage(-1001703165720, `❤️‍🔥`, {parse_mode: 'HTML'}).catch(error => console.log(error))
             await ctx.reply(ctx.message.text.split(' ')[1] + ' ' + 'Готово!', {parse_mode: 'HTML'}).catch(error => console.log(error))
             if(this.db.love.includes(love.id)){
                 setTimeout(async () => {
-                    await ctx.telegram.sendMessage(-1001703165720, 'Среди нас новые любовнички!!!\n❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥', {parse_mode: 'HTML'}).catch(error => console.log(error))
-                }, 100000)
+                    await ctx.telegram.sendMessage(-1001703165720, 'Некоторое время назад у нас появились любовнички!!!\n❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥', {parse_mode: 'HTML'}).catch(error => console.log(error))
+                }, await getRandomIndex(100000, 1000000))
             }
         }
         else{
