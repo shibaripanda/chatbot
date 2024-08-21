@@ -42,7 +42,7 @@ time: {
 love: {
     type: Array,
     default: [],
-    required: true,
+    required: false,
 }
 }, { timestamps: true});
 
