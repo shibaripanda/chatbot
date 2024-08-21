@@ -8,7 +8,7 @@ export const botMessage = async (bot, appContext) => {
         bot.on('message', async (ctx) => {
 
             const buttons = [
-                [{ text: 'Ладноо', callback_data: 'x' },
+                [{ text: 'Лаааадно', callback_data: 'x' },
                 { text: 'Осуждаем', callback_data: 'xxx' }]
             ]
 
@@ -49,6 +49,9 @@ export const botMessage = async (bot, appContext) => {
                     }
                     else if(ctx.message.text.split(' ')[0] === 'anon' && ctx.chat.id > 0){
                         await ctx.telegram.sendMessage(-1001703165720, ctx.message.text.substring(5, ctx.message.text.length), {parse_mode: 'HTML', reply_markup: {inline_keyboard: buttons}}).catch(error => console.log(error))
+                    }
+                    else if(ctx.message.text.split(' ')[0] === 'love' && ctx.chat.id > 0){
+                        await user.addLove(ctx)
                     }
                     else{
                         if(await getRandomIndex(0, 20) == 15){

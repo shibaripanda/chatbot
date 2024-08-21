@@ -38,6 +38,11 @@ time: {
     type: Array,
     // default: [{in: Date.now()}],
     required: false,
+},
+love: {
+    type: Array,
+    default: [],
+    required: true,
 }
 }, { timestamps: true});
 

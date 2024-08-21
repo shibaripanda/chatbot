@@ -1,10 +1,26 @@
 import { fix } from "../fix.js";
+import { User } from "../models/user.js";
 import { timeStringFull } from "../timeStringFull.js";
 
 export class UserClass {
 
     constructor(user) {
       this.db = user;
+    }
+
+    async addLove(ctx){
+        const love = await User.findOneAndUpdate({usernameCurrent: ctx.message.text.split(' ')[1]}, {$addToSet: {love: this.db.id}})
+        if(love){
+            await ctx.reply(ctx.message.text.split(' ')[1] + ' ' + 'Готово!', {parse_mode: 'HTML'}).catch(error => console.log(error))
+            if(this.db.love.includes(love.id)){
+                setTimeout(async () => {
+                    await ctx.telegram.sendMessage(-1001703165720, 'Среди нас новые любовнички!!!\n❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥', {parse_mode: 'HTML'}).catch(error => console.log(error))
+                }, 100000)
+            }
+        }
+        else{
+            await ctx.reply(ctx.message.text.split(' ')[1] + ' ' + 'возможно ошибка в имени', {parse_mode: 'HTML'}).catch(error => console.log(error))
+        }
     }
     async upDate(obj){
         console.log('updateData', this.db.usernameCurrent)
@@ -41,6 +57,7 @@ export class UserClass {
         `\n<b>🐼 Я с вами:</b> ${this.countDays()} дней` + 
         `\n<b>🐼 Первый:</b> ${await this.dateStart()}` + 
         `\n<b>🐼 Последний:</b> ${await this.dateLast()}` +
+        `\n<b>❤️‍🔥 Поклонники:</b> ${this.db.love.length}` +
         `\n💬 ${this.db.countMessagesInChat} 🚪 ${this.db.time.length}`
         return info
     }
