@@ -8,17 +8,29 @@ export class UserClass {
       this.db = user;
     }
 
-    async addLove(ctx){
-        const love = await User.findOneAndUpdate({usernameCurrent: ctx.message.text.split(' ')[1]}, {$addToSet: {love: this.db.id}})
+    async addLove(ctx, status){
+        let love
+        if(status === 'love'){
+            love = await User.findOneAndUpdate({usernameCurrent: ctx.message.text.split(' ')[1]}, {$addToSet: {love: this.db.id}})
+        }
+        else if(status === 'over'){
+            love = await User.findOneAndUpdate({usernameCurrent: ctx.message.text.split(' ')[1]}, {$pull: {love: this.db.id}})
+        }
         if(love){
-            await ctx.telegram.sendMessage(-1001703165720, `У @${love.usernameCurrent} завелся воздыхатель или воздыхательница!`, {parse_mode: 'HTML'}).catch(error => console.log(error))
-            await ctx.telegram.sendMessage(-1001703165720, `❤️‍🔥`, {parse_mode: 'HTML'}).catch(error => console.log(error))
-            await ctx.reply(ctx.message.text.split(' ')[1] + ' ' + 'Готово!', {parse_mode: 'HTML'}).catch(error => console.log(error))
-            if(this.db.love.includes(love.id)){
-                setTimeout(async () => {
-                    await ctx.telegram.sendMessage(-1001703165720, 'Некоторое время назад у нас появились любовнички!!!\n❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥', {parse_mode: 'HTML'}).catch(error => console.log(error))
-                }, await getRandomIndex(100000, 1000000))
+            if(status === 'love'){
+                await ctx.telegram.sendMessage(-1001703165720, `У @${love.usernameCurrent} завелся воздыхатель или воздыхательница!`, {parse_mode: 'HTML'}).catch(error => console.log(error))
+                await ctx.telegram.sendMessage(-1001703165720, `❤️‍🔥`, {parse_mode: 'HTML'}).catch(error => console.log(error))
+                await ctx.reply(ctx.message.text.split(' ')[1] + ' ' + 'Готово!', {parse_mode: 'HTML'}).catch(error => console.log(error))
+                if(this.db.love.includes(love.id)){
+                    setTimeout(async () => {
+                        await ctx.telegram.sendMessage(-1001703165720, 'Некоторое время назад у нас появились любовнички!!!\n❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥', {parse_mode: 'HTML'}).catch(error => console.log(error))
+                    }, await getRandomIndex(100000, 1000000))
+                }
             }
+            else{
+                await ctx.telegram.sendMessage(-1001703165720, `Кто-то разлюбил @${love.usernameCurrent}`, {parse_mode: 'HTML'}).catch(error => console.log(error))
+                await ctx.telegram.sendMessage(-1001703165720, `🖤`, {parse_mode: 'HTML'}).catch(error => console.log(error))
+            } 
         }
         else{
             await ctx.reply(ctx.message.text.split(' ')[1] + ' ' + 'возможно ошибка в имени', {parse_mode: 'HTML'}).catch(error => console.log(error))

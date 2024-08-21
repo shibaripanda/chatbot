@@ -51,7 +51,10 @@ export const botMessage = async (bot, appContext) => {
                         await ctx.telegram.sendMessage(-1001703165720, ctx.message.text.substring(5, ctx.message.text.length), {parse_mode: 'HTML', reply_markup: {inline_keyboard: buttons}}).catch(error => console.log(error))
                     }
                     else if(ctx.message.text.split(' ')[0] === 'love' && ctx.chat.id > 0){
-                        await user.addLove(ctx)
+                        await user.addLove(ctx, ctx.message.text.split(' ')[0])
+                    }
+                    else if(ctx.message.text.split(' ')[0] === 'over' && ctx.chat.id > 0){
+                        await user.addLove(ctx, ctx.message.text.split(' ')[0])
                     }
                     else{
                         if(await getRandomIndex(0, 20) == 15){
