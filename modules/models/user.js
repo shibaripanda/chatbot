@@ -43,6 +43,11 @@ love: {
     type: Array,
     default: [],
     required: false,
+},
+loveStatus: {
+    type: Boolean,
+    default: false,
+    required: false,
 }
 }, { timestamps: true});
 

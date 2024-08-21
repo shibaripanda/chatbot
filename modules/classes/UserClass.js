@@ -11,12 +11,20 @@ export class UserClass {
     async addLove(ctx, status){
         let love
         if(status === 'love'){
-            love = await User.findOneAndUpdate({usernameCurrent: ctx.message.text.split(' ')[1]}, {$addToSet: {love: this.db.id}})
+            if(!this.db.loveStatus){
+                love = await User.findOneAndUpdate({usernameCurrent: ctx.message.text.split(' ')[1]}, {$addToSet: {love: this.db.id}})
+            }
+            else{
+                love = false
+            }
         }
         else if(status === 'over'){
             love = await User.findOneAndUpdate({usernameCurrent: ctx.message.text.split(' ')[1]}, {$pull: {love: this.db.id}})
         }
         if(love){
+            if(status === 'love') await this.upDate({loveStatus: true})
+            else if(status === 'over') await this.upDate({loveStatus: false})
+            
             if(status === 'love'){
                 await ctx.telegram.sendMessage(-1001703165720, `У @${love.usernameCurrent} завелся воздыхатель или воздыхательница!`, {parse_mode: 'HTML'}).catch(error => console.log(error))
                 await ctx.telegram.sendMessage(-1001703165720, `❤️‍🔥`, {parse_mode: 'HTML'}).catch(error => console.log(error))
@@ -33,7 +41,7 @@ export class UserClass {
             } 
         }
         else{
-            await ctx.reply(ctx.message.text.split(' ')[1] + ' ' + 'возможно ошибка в имени', {parse_mode: 'HTML'}).catch(error => console.log(error))
+            await ctx.reply(ctx.message.text.split(' ')[1] + ' ' + 'возможно ошибка в имени или ты уже кого-то любишь, исправь имя или отмени прошлую любовь', {parse_mode: 'HTML'}).catch(error => console.log(error))
         }
     }
     async upDate(obj){
