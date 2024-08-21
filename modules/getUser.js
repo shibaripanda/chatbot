@@ -6,7 +6,7 @@ import { User } from "./models/user.js"
 export const getUser = async (ctx, appContext) => {
     try{
         // console.log(await User.countDocuments())
-        const obj = {_id: 1, id: 1, usernameCurrent: 1, countMessagesInChat: 1, text: 1, photoForPresent: 1, time: 1, createdAt: 1, updatedAt: 1, statusName: 1, status: 1}
+        const obj = {_id: 1, id: 1, usernameCurrent: 1, countMessagesInChat: 1, love: 1, text: 1, photoForPresent: 1, time: 1, createdAt: 1, updatedAt: 1, statusName: 1, status: 1}
         let user = await User.findOne({id: ctx.from.id}, obj)
         if(!user){
              user = await User({
