@@ -1,6 +1,7 @@
 import { fix } from "../fix.js";
 import { User } from "../models/user.js";
 import { timeStringFull } from "../timeStringFull.js";
+import { getRandomIndex } from "../getRandomIndex.js"
 
 export class UserClass {
 
